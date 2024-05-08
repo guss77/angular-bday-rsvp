@@ -26,7 +26,7 @@ export class RsvpComponent {
 
   rsvpform = this.fb.group({
     name: '',
-    count: 0
+    count: 2
   });
 
   constructor(private fb: FormBuilder, private http:HttpClient, private router:Router) { }
