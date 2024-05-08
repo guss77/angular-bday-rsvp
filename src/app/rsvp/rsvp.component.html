@@ -1,0 +1,44 @@
+<div class="titlecard">
+  <img src="assets/invitation.jpeg" alt="מסיבת הולדת לדניאל" />
+</div>
+<form [formGroup]="rsvpform" (ngSubmit)="onSubmit()">
+<p>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>שם</mat-label>
+    <input matInput placeholder="" formControlName="name" required>
+    <mat-icon matPrefix>badge</mat-icon>
+  </mat-form-field>
+</p>
+<p>
+<span *ngIf="isDesktop; then desktopCount else mobileCount"></span>
+<ng-template #mobileCount>
+<mat-form-field>
+  <mat-label>כמה מגיעים?</mat-label>
+  <select matNativeControl formControlName="count" required>
+    <option value="1">1</option>
+    <option value="2" selected>2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</mat-form-field>
+</ng-template>
+<ng-template #desktopCount>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>כמה מגיעים?</mat-label>
+    <input matInput placeholder="" type="number" value="2" min="1" max="10" formControlName="count" required>
+    <mat-icon matPrefix>tag</mat-icon>
+  </mat-form-field>
+</ng-template>
+</p>
+<p>
+  <button mat-stroked-button type="submit">
+    <span>אישור</span>
+  </button>
+</p>
+</form>

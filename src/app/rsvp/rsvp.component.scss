@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1em;
+  width: 100%;
+}
+
+mat-form-field {
+  background-color: #fff8;
+  width: 20em;
+}
+
+mat-icon {
+  color: gray;
+}
+
+button {
+  background-color: #fffa;
+  width: 20em;
+  height: 3em;
+  box-sizing: content-box;
+  span {
+    font-size: 150%;
+  }
+}
