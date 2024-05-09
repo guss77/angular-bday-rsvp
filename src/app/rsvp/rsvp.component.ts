@@ -5,7 +5,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule,
-    MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatSelectModule,
+    MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatSelectModule, MatProgressSpinnerModule,
   ],
   templateUrl: './rsvp.component.html',
   styleUrl: './rsvp.component.scss',
@@ -24,9 +25,10 @@ import { Router } from '@angular/router';
 })
 export class RsvpComponent {
 
+  loading = false;
   rsvpform = this.fb.group({
-    name: '',
-    count: 2
+    name: new FormControl({ value: '', disabled: false }),
+    count: new FormControl({ value: this.isDesktop ? 2 : 0, disabled: false }),
   });
 
   constructor(private fb: FormBuilder, private http:HttpClient, private router:Router) { }
@@ -41,9 +43,15 @@ export class RsvpComponent {
     }
   }
 
+  startLoading(): void {
+    this.loading = true;
+    this.rsvpform.disable();
+  }
+
   onSubmit(): void {
     if (!this.rsvpform.valid)
       return;
+    this.startLoading();
     let baseurl = '';
     if (window.location.hostname === 'localhost')
       baseurl = 'https://daniel.geek.co.il/submit.php';
