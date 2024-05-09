@@ -13,7 +13,7 @@
 <p>
 <span *ngIf="isDesktop; then desktopCount else mobileCount"></span>
 <ng-template #mobileCount>
-<mat-form-field>
+<mat-form-field subscriptSizing="dynamic">
   <mat-label>כמה מגיעים?</mat-label>
   <select matNativeControl formControlName="count" required>
     <option value="1">1</option>
